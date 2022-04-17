@@ -6,30 +6,30 @@ from sklearn import datasets
 import matplotlib.pyplot as plt
 from IPython.core.pylabtools import figsize
 
-###  RAW data
-data = datasets.load_wine()
-df_wine = pd.DataFrame(data.data, columns=data.feature_names)
-df_wine['target'] = data.target
-
-var_columns = [c for c in df_wine.columns]
-X = df_wine.loc[:, var_columns]
-y = df_wine.loc[:, 'target']
-###
-
-# ### STANDARDIZED data
-# data_s=datasets.load_wine()
-#
-# X_data = data_s.data
-# # standardization of dependent variables
-# standard = preprocessing.scale(X_data)
-#
-# df_wine = pd.DataFrame(standard, columns=data_s.feature_names)
-# df_wine['target'] = data_s.target
+# ###  RAW data
+# data = datasets.load_wine()
+# df_wine = pd.DataFrame(data.data, columns=data.feature_names)
+# df_wine['target'] = data.target
 #
 # var_columns = [c for c in df_wine.columns]
-# X = df_wine.loc[:,var_columns]
-# y = df_wine.loc[:,'target']
-# ####
+# X = df_wine.loc[:, var_columns]
+# y = df_wine.loc[:, 'target']
+# ###
+
+### STANDARDIZED data
+data_s=datasets.load_wine()
+
+X_data = data_s.data
+# standardization of dependent variables
+standard = preprocessing.scale(X_data)
+
+df_wine = pd.DataFrame(standard, columns=data_s.feature_names)
+df_wine['target'] = data_s.target
+
+var_columns = [c for c in df_wine.columns]
+X = df_wine.loc[:,var_columns]
+y = df_wine.loc[:,'target']
+####
 
 state = 12
 test_size = 0.30
@@ -68,7 +68,7 @@ plt.legend()
 
 plt.figure('Distribution')
 figsize(8, 4)
-name_col = 'hue'
+name_col = 'alcohol'
 plt.style.use('fivethirtyeight')
 plt.hist(df_wine[name_col].dropna(), bins=20, edgecolor='k')
 plt.xlabel(name_col)
